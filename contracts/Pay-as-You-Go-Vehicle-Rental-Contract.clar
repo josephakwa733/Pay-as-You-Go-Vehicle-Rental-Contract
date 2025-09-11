@@ -121,7 +121,8 @@
       (current-block stacks-block-height)
       (duration (- current-block (get start-block rental)))
       (rate (default-to (var-get rate-per-minute) (get rate-override vehicle)))
-      (total-cost (* duration rate))
+      (base-cost (* duration rate))
+      (total-cost (unwrap-panic (contract-call? .vehicle-loyalty-program apply-loyalty-discount base-cost tx-sender)))
       (user-balance (get-user-balance tx-sender))
     )
     (asserts! (is-eq (get renter rental) tx-sender) ERR_NOT_AUTHORIZED)
@@ -145,7 +146,12 @@
       (merge vehicle { available: true })
     )
     (map-delete active-rentals { vehicle-id: vehicle-id })
-    (ok total-cost)
+    (let
+      (
+        (loyalty-update (contract-call? .vehicle-loyalty-program record-rental-completion tx-sender total-cost))
+      )
+      (ok total-cost)
+    )
   )
 )
 

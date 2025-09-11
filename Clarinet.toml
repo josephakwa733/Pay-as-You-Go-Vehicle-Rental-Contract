@@ -9,6 +9,10 @@ requirements = []
 path = 'contracts/Pay-as-You-Go-Vehicle-Rental-Contract.clar'
 clarity_version = 3
 epoch = 3.1
+[contracts.vehicle-loyalty-program]
+path = 'contracts/vehicle-loyalty-program.clar'
+clarity_version = 3
+epoch = 3.1
 [repl.analysis]
 passes = ['check_checker']
 
