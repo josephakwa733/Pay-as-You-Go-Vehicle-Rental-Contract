@@ -13,6 +13,10 @@ epoch = 3.1
 path = 'contracts/vehicle-loyalty-program.clar'
 clarity_version = 3
 epoch = 3.1
+[contracts.vehicle-reservation]
+path = 'contracts/vehicle-reservation.clar'
+clarity_version = 3
+epoch = 3.1
 [repl.analysis]
 passes = ['check_checker']
 
